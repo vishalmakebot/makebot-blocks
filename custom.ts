@@ -77,13 +77,9 @@ namespace Makebot {
     }
 /***********************************Line follower Sensor********************************************************* */
      //%block="Line Follower sensor %s detect %n"
-    export function line(s:DigitalPin , n: string): void {
+    export function line(s:DigitalPin ,n: linestate): void {
     let black , white
     n = black||white
-    enum Linestate{
-        white=1 ,
-        black = 0
-    }
     let sens1 :AnalogPin , speed , m1:DigitalPin , m2:DigitalPin
     if(sens1=1)
     {
@@ -101,6 +97,10 @@ namespace Makebot {
         m2=0
     }
 
+    }
+    export enum linestate {
+        white=1 ,
+        black = 0
     }
     
 }
