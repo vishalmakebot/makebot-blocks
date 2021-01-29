@@ -17,11 +17,14 @@ namespace Makebot {
      * @param s describe parameter here Surname
      */
     //% block="My Name is %n Surname %s"
+    //% weight=100 color=#FC0A0A
     export function myName(n: string, s: string): void {
         basic.showString(n)
         basic.showString(s)
     }
-
+/***************************Ultrasonic Sensor ************************************************** */
+    
+    
     //% blockId=Makebot block="Ultrasonic|Trig %Trig|Echo %Echo"
     //% color="#0fbc11 "
     //% weight=100
@@ -42,13 +45,13 @@ namespace Makebot {
 
 /*****************************************************************************************
  **********************************IR SENSOR***************************************************/
-    //% block="IR_Sensor Pin %myPin Value %value obstacle"
+    //% block="IR_Sensor Pin %myPin Value %value"
     //% weight=100 
     //% blockGap=20
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
    
-    export function Ir_Sens(myPin:DigitalPin,value:enIR):boolean {
+    export function Ir_Sens(myPin:DigitalPin,value:IRstate):boolean {
 
         pins.setPull(myPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(myPin) == value) {
@@ -59,24 +62,31 @@ namespace Makebot {
         }
 
     }
-     export enum enIR {
+     export enum IRstate {
        
         Get = 0,
        
         NoGet = 1
     }
     
-    //%blockId= Makebot block="IR_Send|pin %pin"
+    //%blockId= Makebot block="IR|pin %pin"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function IR_Send(pin:DigitalPin): void {
-        IR_Send(pin);
+    export function IR(pin:DigitalPin): void {
+        IR(pin);
 
     }
+
 /***********************************Line follower Sensor********************************************************* */
-     //%block="Line Follower sensor %s detect %n"
+    
+    
+    //%block="Line Follower sensor %s detect %n"
+    //% weight=100
+    //% blockGap=10
+    //% color="#F7664D"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function line(s:DigitalPin ,n: linestate): void {
     let black , white
     n = black||white
@@ -102,5 +112,36 @@ namespace Makebot {
         white=1 ,
         black = 0
     }
+
+/*****************************RGB Lights***************************************************** */
+
+    //% block="RGB Lights connected to pin %pin Value %value"
+    //% weight=100
+    //% blockGap=10
+    //% color="#27D9F7"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Lights(pin:DigitalPin): void {
+    enum Colors {
     
+    Red = 0xFF0000,
+   
+    Orange = 0xFFA500,
+    
+    Yellow = 0xFFFF00,
+    
+    Green = 0x00FF00,
+    
+    Blue = 0x0000FF,
+    
+    Indigo = 0x4b0082,
+    
+    Violet = 0x8a2be2,
+    
+    Purple = 0xFF00FF,
+    
+    White = 0xFFFFFF,
+    
+    Black = 0x000000
+}
+}
 }
